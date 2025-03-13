@@ -35,9 +35,11 @@ export function UserSheet() {
           />
         </Button>
       </SheetTrigger>
-      <SheetContent className="w-80 bg-black text-white border-l border-[#2a2a2a]">
+      <SheetContent className="w-[600px] bg-gray-900 text-white border-l border-[#2a2a2a]">
         <SheetHeader className="relative border-b border-[#2a2a2a] pb-4">
-          <SheetTitle>Profile</SheetTitle>
+          <SheetTitle className="text-white text-xl font-bold">
+            Profile
+          </SheetTitle>
           {/* Profile Section */}
           <div className="flex flex-col items-center bg-[#191919] rounded-xl p-4">
             <div className="relative w-24 h-24 mb-3">
@@ -51,7 +53,7 @@ export function UserSheet() {
             </div>
             <span className="text-xl font-semibold">Guest</span>
             <Link href="/login" onClick={() => setOpen(false)}>
-              <Button className="mt-2 w-24 bg-pink-600 hover:bg-pink-700 text-white text-sm font-medium rounded-full">
+              <Button className="mt-2 w-24 bg-[#E11D48] hover:bg-[#E11D48]/70 text-white text-sm font-medium rounded-full">
                 Login
               </Button>
             </Link>
@@ -59,16 +61,16 @@ export function UserSheet() {
         </SheetHeader>
 
         {/* Menu Items */}
-        <div className="mt-4 space-y-1">
+        <div className="mt-4 space-y-1 font-bold">
           <Link
             href="/subscription"
             onClick={() => setOpen(false)}
             className="flex items-center justify-between px-4 py-3 text-gray-200 hover:text-white hover:bg-[#2a2a2a] rounded-lg transition"
           >
-            <span className="font-medium">Subscribe Now</span>
+            <span className="font-bold">Subscribe Now</span>
             <ChevronRight className="h-5 w-5" />
           </Link>
-          <hr className="border-[#2a2a2a] mx-4" />
+          <hr className="border-[#2a2a2a] mx-4 font-semibold" />
 
           {[
             { label: "Home", href: "/" },

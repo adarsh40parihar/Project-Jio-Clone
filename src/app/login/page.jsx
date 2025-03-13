@@ -1,80 +1,141 @@
-import * as React from "react";
+"use client";
 
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { useState } from "react";
 import Link from "next/link";
+import { Eye, EyeOff } from "lucide-react";
+import { motion } from "framer-motion";
 
-function Login() {
-    return (
-      <div className="h-[100vh] flex justify-center items-center bg-black border-none">
-        <Card className="w-[400px] h-[380px] bg-gray-900 text-white">
-          <CardHeader>
-            <CardTitle className="text-2xl font-bold">Login</CardTitle>
-            <CardDescription className="text-sm text-gray-400">
-              Enter your email below to login to your account.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form>
-              <div className="grid w-full items-center gap-4">
-                <div className="flex flex-col space-y-1.5">
-                  <Label htmlFor="name" className="text-sm">
-                    Email
-                  </Label>
-                  <Input
-                    className="border-2 border-gray-600 focus:border-pink-900 bg-black text-white px-3 py-2 rounded-md"
-                    id="name"
-                    placeholder="me@example.com"
-                  />
-                </div>
-                <div className="flex flex-col space-y-1.5">
-                  <Label htmlFor="password">Password</Label>
-                  <Input
-                    className="border-2 border-gray-600 focus:border-pink-900 bg-black text-white px-3 py-2 rounded-md"
-                    id="password"
-                    placeholder="Password"
-                  />
-                </div>
-              </div>
-            </form>
-          </CardContent>
-          <CardFooter className="flex flex-col text-xs">
-            <div className="w-full">
-              <Button variant="destructive" className="w-full bg-pink-900">
-                Login
-              </Button>
-            </div>
-            <div className="flex mt-4 justify-centre gap-6 ml-0 text-[13px]">
-              <Button
-                className="hover:text-gray-500 ml-0 pl-0 text-white"
-                variant="link"
+export default function LoginPage() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    setIsLoading(false);
+  };
+
+  return (
+    <div className="min-h-screen bg-[#0C0A09] flex justify-center items-start pt-20 ">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="w-full max-w-md"
+      >
+        <div className="bg-[#1a1a1a] rounded-lg shadow-xl p-8">
+          <motion.h1
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.1 }}
+            className="text-2xl font-bold text-white mb-2"
+          >
+            Login
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="text-gray-400 mb-6"
+          >
+            Enter your email below to login to your account.
+          </motion.p>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              <label
+                htmlFor="email"
+                className="block text-base font-medium text-gray-200 mb-1"
               >
-                Forgot Password?
-              </Button>
-              <div className="ml-4 ">
-                <p>
-                  <span className="m-0 text-[13px] p-0 ">Need an account?</span>
-                  <Button
-                    className="m-0 p-1 underline hover:text-gray-500 text-white"
-                    variant="link"
-                  >
-                    Signup
-                  </Button>
-                </p>
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="m@example.com"
+                className="w-full px-4 py-2 bg-[#0C0A09] border border-[#3a3a3a] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#E11D48] focus:border-transparent transition-all mb-2"
+                required
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+            >
+              <label
+                htmlFor="password"
+                className="block text-base font-medium text-gray-200 mb-1"
+              >
+                Password
+              </label>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full px-4 py-2 bg-[#0C0A09] border border-[#3a3a3a] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#E11D48] focus:border-transparent transition-all mb-2"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-5 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
               </div>
+            </motion.div>
+            <motion.button
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              type="submit"
+              disabled={isLoading}
+              className="w-full bg-[#E11D48] hover:bg-[#E11D48]/90 text-white font-semibold py-2 rounded-lg transition-colors relative overflow-hidden disabled:opacity-50"
+            >
+              {isLoading ? (
+                <div className="flex items-center justify-center">
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                </div>
+              ) : (
+                "Sign in"
+              )}
+            </motion.button>
+          </form>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+            className="mt-6 flex items-center justify-between text-base"
+          >
+            <Link
+              href="/forgot-password"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              Forgot Password?
+            </Link>
+            <div className="text-gray-400">
+              Need an account?{" "}
+              <Link
+                href="/signup"
+                className="text-white hover:text-[#E11D48] transition-colors"
+              >
+                Sign Up
+              </Link>
             </div>
-          </CardFooter>
-        </Card>
-      </div>
-    );
+          </motion.div>
+        </div>
+      </motion.div>
+    </div>
+  );
 }
-export default Login;
