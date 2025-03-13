@@ -11,7 +11,7 @@ import { UserSheet } from "./UserSheet";
 export default function Header() {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   return (
-    <header className="bg-gray-900 text-white p-4 flex items-center justify-between fixed top-0 left-0 w-full z-50">
+    <header className="bg-gray-900 text-white p-4 flex items-center justify-between fixed top-0 left-0 w-full z-50 border-b-2 border-[#2a2a2a]">
       <div className="flex items-center space-x-4 lg:space-x-6">
         <Link href="/" className="flex items-center space-x-2">
           <Image

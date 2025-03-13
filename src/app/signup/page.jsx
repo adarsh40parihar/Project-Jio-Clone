@@ -25,7 +25,7 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0C0A09] flex justify-center items-center pb-20">
+    <div className="bg-[#0C0A09] flex justify-center items-center p-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
